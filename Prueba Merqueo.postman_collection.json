@@ -1,0 +1,250 @@
+{
+	"info": {
+		"_postman_id": "dfe72311-299b-4dbe-8660-4e7928549ce4",
+		"name": "Prueba Merqueo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create a Post",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json()",
+							"",
+							"pm.collectionVariables.set('postID', jsonData.id)",
+							"",
+							"pm.test(\"Status test 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"pm.test(\"User ID\", function () {",
+							"    pm.expect(jsonData.userId).to.be.equal(1);",
+							"});",
+							"",
+							"pm.test(\"Title Post\", function () {",
+							"    pm.expect(jsonData.title).to.be.equal('Prueba Merqueo');",
+							"});",
+							"",
+							"pm.test(\"body Post\", function () {",
+							"    pm.expect(jsonData.body).to.be.equal('Testing');",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Prueba Merqueo\",\n    \"body\": \"Testing\",\n    \"userId\": 1\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://jsonplaceholder.typicode.com/posts",
+					"protocol": "https",
+					"host": [
+						"jsonplaceholder",
+						"typicode",
+						"com"
+					],
+					"path": [
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json()",
+							"",
+							"pm.collectionVariables.set('postID', jsonData.id)",
+							"",
+							"pm.test(\"Status test 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"User ID\", function () {",
+							"    pm.expect(jsonData.userId).to.be.equal(10);",
+							"});",
+							"",
+							"pm.test(\"Title Post\", function () {",
+							"    pm.expect(jsonData.title).to.be.equal(\"at nam consequatur ea labore ea harum\");",
+							"});",
+							"",
+							"pm.test(\"body Post\", function () {",
+							"    pm.expect(jsonData.body).to.be.equal(\"cupiditate quo est a modi nesciunt soluta\\nipsa voluptas error itaque dicta in\\nautem qui minus magnam et distinctio eum\\naccusamus ratione error aut\");",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}posts/100",
+					"host": [
+						"{{URL}}posts"
+					],
+					"path": [
+						"100"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Post",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json()",
+							"",
+							"",
+							"pm.test(\"Status test 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"User ID\", function () {",
+							"    pm.expect(jsonData.userId).to.be.equal(1);",
+							"});",
+							"",
+							"pm.test(\"Title Post\", function () {",
+							"    pm.expect(jsonData.title).to.be.equal(\"Prueba Merqueo\");",
+							"});   "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Prueba Merqueo\",\n    \"body\": \"Testing\",\n    \"userId\": 1\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}posts/{{postID}}",
+					"host": [
+						"{{URL}}posts"
+					],
+					"path": [
+						"{{postID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Post",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json()",
+							"",
+							"",
+							"pm.test(\"Status test 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Title Post\", function () {",
+							"    pm.expect(jsonData.title).to.be.equal(\"Edd\");",
+							"});   "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Edd\"\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}posts/{{postID}}",
+					"host": [
+						"{{URL}}posts"
+					],
+					"path": [
+						"{{postID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Post Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json()",
+							"",
+							"",
+							"pm.test(\"Status test 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"}); "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}posts/{{postID}}",
+					"host": [
+						"{{URL}}posts"
+					],
+					"path": [
+						"{{postID}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "postID",
+			"value": ""
+		}
+	]
+}
