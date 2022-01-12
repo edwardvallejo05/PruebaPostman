@@ -1,0 +1,257 @@
+{
+	"info": {
+		"_postman_id": "9582753e-e7a2-42e8-b013-035ed6a0752b",
+		"name": "MyCollection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json()",
+							"",
+							"pm.collectionVariables.set('userID', jsonData.data.id)",
+							"",
+							"pm.test(\"Status test 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"pm.test(\"User Names\", function () {",
+							"    pm.expect(jsonData.data.name).to.be.equal('Edward Vallejo');",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Edward Vallejo\",\n    \"gender\": \"male\",\n    \"email\": \"edward.vallejo@tests.com\",\n    \"status\": \"active\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://gorest.co.in/public/v1/users",
+					"protocol": "https",
+					"host": [
+						"gorest",
+						"co",
+						"in"
+					],
+					"path": [
+						"public",
+						"v1",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json()",
+							"",
+							"pm.collectionVariables.set('userID', jsonData.data.id)",
+							"",
+							"pm.test(\"Status test 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Result to have Property ID\", function () {",
+							"    pm.expect(jsonData.data).to.have.property('id');",
+							"});",
+							"",
+							"pm.test(\"User Names\", function () {",
+							"    pm.expect(jsonData.data.name).to.be.equal('Edward Vallejo');",
+							"});",
+							"",
+							"pm.test(\"User Email\", function () {",
+							"    pm.expect(jsonData.data.email).to.be.equal('edward.vallejo@tests.com');",
+							"});",
+							"",
+							"pm.test(\"User Gender\", function () {",
+							"    pm.expect(jsonData.data.gender).to.be.equal('male');",
+							"});",
+							"",
+							"pm.test(\"User Status\", function () {",
+							"    pm.expect(jsonData.data.status).to.be.equal('active');",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://gorest.co.in/public/v1/users/{{userID}}",
+					"protocol": "https",
+					"host": [
+						"gorest",
+						"co",
+						"in"
+					],
+					"path": [
+						"public",
+						"v1",
+						"users",
+						"{{userID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Updating",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json()",
+							"",
+							"pm.test(\"Status test 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"User Names\", function () {",
+							"    pm.expect(jsonData.data.name).to.be.equal('Edward Vallejo');",
+							"});",
+							"",
+							"pm.test(\"User Email\", function () {",
+							"    pm.expect(jsonData.data.email).to.be.equal('edward.vallejo@tests.com');",
+							"});",
+							"",
+							"pm.test(\"User Gender\", function () {",
+							"    pm.expect(jsonData.data.gender).to.be.equal('male');",
+							"});",
+							"",
+							"pm.test(\"User Status\", function () {",
+							"    pm.expect(jsonData.data.status).to.be.equal('inactive');",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"status\": \"Inactive\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://gorest.co.in/public/v1/users/{{userID}}",
+					"protocol": "https",
+					"host": [
+						"gorest",
+						"co",
+						"in"
+					],
+					"path": [
+						"public",
+						"v1",
+						"users",
+						"{{userID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test 204\", function () {",
+							"    pm.response.to.have.status(204);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://gorest.co.in/public/v1/users/{{userID}}",
+					"protocol": "https",
+					"host": [
+						"gorest",
+						"co",
+						"in"
+					],
+					"path": [
+						"public",
+						"v1",
+						"users",
+						"{{userID}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "241150a57f91bb26f53c7ea251978e58e6334577a8229861ff6103f58c41686b",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "userID",
+			"value": "",
+			"type": "default"
+		}
+	]
+}
